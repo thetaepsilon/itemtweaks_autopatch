@@ -18,10 +18,14 @@ trap cleanup EXIT;
 
 
 
+do_jq() {
+	jq --tab "$@";
+}
+
 _dopatch() {
 	_path="data/minecraft/$1";
 	echo "$_path";
-	jq --tab "$2" < "$src/$_path" > "$dest/$_path";
+	do_jq "$2" < "$src/$_path" > "$dest/$_path";
 }
 
 recipe_count() {
@@ -107,7 +111,7 @@ do_patch_complex() {
 	_script="$lib/jq/$2";
 	shift 2;
 	echo "$_path";
-	jq --tab -f "$_script" "$@" < "$src/$_path" > "$dest/$_path";
+	do_jq -f "$_script" "$@" < "$src/$_path" > "$dest/$_path";
 }
 
 do_patch_addon_slurp() {
@@ -120,7 +124,7 @@ do_patch_addon_slurp() {
 	"$@" > "$tmp/__addon_slurp.stage1";
 	cat "$src/$_path" "$tmp/__addon_slurp.stage1" > "$tmp/__addon_slurp";
 
-	jq --tab -s -f "$_script" < "$tmp/__addon_slurp" > "$dest/$_path";
+	do_jq -s -f "$_script" < "$tmp/__addon_slurp" > "$dest/$_path";
 
 	(cd "$tmp"; rm __addon_slurp*);
 }
