@@ -2,9 +2,21 @@
 set -Ceu;
 src="$1";
 dest="$2";
-libdir="$3";
+datadir="$3";
+
+patchdata="$datadir/_patchdata";
+lib="$datadir/_lib";
 
 hash jq;
+
+tmp="$(mktemp -d)";
+cleanup() {
+	rm -r "$tmp";
+}
+trap cleanup EXIT;
+
+
+
 
 _dopatch() {
 	_path="data/minecraft/$1";
@@ -92,10 +104,25 @@ button_types_count() {
 
 do_patch_complex() {
 	_path="data/minecraft/$1";
-	_script="$libdir/jq/$2";
+	_script="$lib/jq/$2";
 	shift 2;
 	echo "$_path";
 	jq --tab -f "$_script" "$@" < "$src/$_path" > "$dest/$_path";
+}
+
+do_patch_addon_slurp() {
+	_path="data/minecraft/$1";
+	_script="$lib/jq/$2";
+	shift 2;
+
+	echo "$_path";
+
+	"$@" > "$tmp/__addon_slurp.stage1";
+	cat "$src/$_path" "$tmp/__addon_slurp.stage1" > "$tmp/__addon_slurp";
+
+	jq --tab -s -f "$_script" < "$tmp/__addon_slurp" > "$dest/$_path";
+
+	(cd "$tmp"; rm __addon_slurp*);
 }
 
 ore_base_drops() {
@@ -107,7 +134,7 @@ ore_base_drops() {
 
 
 test -d "$dest/data";
-test -d "./data.static";
+test -d "$datadir/data.static";
 
 echo "## cleanup";
 (
@@ -122,7 +149,7 @@ echo "## cleanup";
 	#mkdir -p minecraft/recipes;
 );
 echo "## static files";
-rsync -rvut "./data.static/" "$dest/data/";
+rsync -rvut "$datadir/data.static/" "$dest/data/";
 echo "## dynamic patches"
 
 
@@ -182,3 +209,27 @@ recipe_count blaze_powder.json 4;
 for i in diamond deepslate_diamond iron deepslate_iron; do {
 	ore_base_drops ${i}_ore.json 2 3;
 }; done;
+
+
+
+### patching based on files follows
+
+(cd "$patchdata/entity_loot"; ls -1) > "$tmp/entity_loot.lst";
+
+(IFS='
+';
+
+	while read filename; do {
+		do_patch_addon_slurp \
+			"loot_tables/entities/$filename" \
+			"simple_entity_uniform_count_and_looting_patch.jq" \
+			cat "$patchdata/entity_loot/$filename";
+	}; done;
+
+) < "$tmp/entity_loot.lst";
+
+
+
+
+
+

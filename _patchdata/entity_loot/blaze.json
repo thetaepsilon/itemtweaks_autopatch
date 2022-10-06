@@ -1,0 +1,12 @@
+{
+	"minecraft:blaze_rod": {
+		"base": {
+			"min": 2,
+			"max": 3
+		},
+		"per_looting_lvl": {
+			"min": 1,
+			"max": 2
+		}
+	}
+}
