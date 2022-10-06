@@ -19,7 +19,7 @@ trap cleanup EXIT;
 
 
 do_jq() {
-	jq --tab "$@";
+	jq --tab --sort-keys "$@";
 }
 
 _dopatch() {
