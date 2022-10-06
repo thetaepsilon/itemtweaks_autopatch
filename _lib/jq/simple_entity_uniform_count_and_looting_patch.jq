@@ -47,7 +47,7 @@ def mod_entries(db):
 	if (length != 1) then
 		bail("expected pool to have single entry, got " + (length | tostring) + ": " + tostring)
 	else
-		(.[0] | lookup_and_apply_entry(db))
+		[ (.[0] | lookup_and_apply_entry(db)) ]
 	end
 ;
 
