@@ -132,24 +132,11 @@ ore_base_drops() {
 
 
 
-
-test -d "$dest/data";
-test -d "$datadir/data.static";
-
 echo "## cleanup";
-(
-	cd "$dest/data";
+rm -r "$dest/data";
 
-	# stupid globstar handling...
-	ls -1 | (IFS='
-';
-		while read name; do rm -r "$name"; done
-	);
-
-	#mkdir -p minecraft/recipes;
-);
 echo "## static files";
-rsync -rvut "$datadir/data.static/" "$dest/data/";
+rsync -rvut "$datadir/data.static/data" "$dest/";
 echo "## dynamic patches"
 
 
