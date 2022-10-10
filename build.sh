@@ -172,6 +172,7 @@ recipe_count barrel.json 7;
 recipe_count chest.json 6;
 
 recipe_count furnace.json 8;
+recipe_count blast_furnace.json 4;
 
 
 for rail in rail activator_rail detector_rail; do recipe_count ${rail}.json 40; done;
