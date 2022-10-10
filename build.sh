@@ -186,12 +186,24 @@ recipe_count shield.json 2;
 
 
 button_types_count button 64;
+button_types_count pressure_plate 16;
+for w in light heavy; do recipe_count ${w}_weighted_pressure_plate.json 2; done;
+
 recipe_count piston.json 8;
 recipe_count observer.json 8;
-
 recipe_count repeater.json 8;
 recipe_count comparator.json 8;
 recipe_count redstone_torch.json 4;
+recipe_count dispenser.json 8;
+recipe_count dropper.json 8;
+recipe_count hopper.json 4;
+recipe_count note_block.json 8;
+recipe_count daylight_detector.json 8;
+
+# iron is the limiting factor for the loop in the tripwire hooks
+recipe_count tripwire_hook.json 12;
+
+
 
 recipe_count brewing_stand.json 8;
 recipe_count blaze_powder.json 4;
