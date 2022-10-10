@@ -156,6 +156,7 @@ door_types_count trapdoor 24;
 wood_types_count stairs 8;
 wood_types_count planks 8;
 wood_types_count fence 32;
+wood_types_count sign 16;
 boat_types_count boat 5;
 
 
