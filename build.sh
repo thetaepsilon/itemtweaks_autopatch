@@ -157,6 +157,7 @@ wood_types_count stairs 8;
 wood_types_count planks 8;
 wood_types_count fence 32;
 wood_types_count sign 16;
+wood_types_count fence_gate 16;
 boat_types_count boat 5;
 
 
@@ -202,6 +203,11 @@ recipe_count daylight_detector.json 8;
 
 # iron is the limiting factor for the loop in the tripwire hooks
 recipe_count tripwire_hook.json 12;
+
+
+
+recipe_count tnt.json 4;
+recipe_count lightning_rod.json 8;
 
 
 
