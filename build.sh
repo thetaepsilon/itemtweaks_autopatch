@@ -171,6 +171,7 @@ recipe_count bucket.json 3;
 recipe_count barrel.json 7;
 recipe_count chest.json 6;
 recipe_count composter.json 6;
+recipe_count beehive.json 8;
 
 recipe_count furnace.json 8;
 recipe_count blast_furnace.json 4;
