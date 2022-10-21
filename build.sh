@@ -245,3 +245,5 @@ for i in diamond deepslate_diamond iron deepslate_iron; do {
 
 
 
+
+recipe_count glass_bottle.json 24;
