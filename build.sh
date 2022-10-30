@@ -216,7 +216,7 @@ recipe_count blaze_powder.json 4;
 
 
 for i in diamond deepslate_diamond iron deepslate_iron; do {
-	ore_base_drops ${i}_ore.json 2 3;
+	ore_base_drops ${i}_ore.json 2 4;
 }; done;
 
 
