@@ -183,10 +183,6 @@ recipe_count powered_rail.json 24;
 
 
 
-for tool in shovel hoe axe sword pickaxe; do tool_materials_count "$tool" 2; done;
-recipe_count flint_and_steel.json 2;
-recipe_count shield.json 2;
-
 
 
 button_types_count button 64;
